@@ -7,11 +7,10 @@ const Form = ({ addColor }) => {
   const handlChange = (e) => {
     const { name, value } = e.target;
     setColor({ ...color, [name]: value });
-    console.log(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    addColor(color);
+    addColor(color.colorbox);
   };
   return (
     <section className="container">

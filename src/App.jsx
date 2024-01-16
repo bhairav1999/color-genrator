@@ -1,16 +1,30 @@
-import { useState } from "react";
-import ColorList from "./components/ColorList";
-import Form from "./components/Form";
-import Values from "values.js";
 
+
+
+
+import Values from 'values.js';
+import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import Form from './components/Form';
+import ColorList from './components/ColorList';
 const App = () => {
-  const [colors , setcolors]=useState([new Values(`#f15025`).all(10)])
- 
+  const [colors, setColors] = useState(new Values('#f15025').all(10));
+
+  const addColor = (color) => {
+    try {
+      const newColors = new Values(color).all(10);
+      setColors(newColors);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
-    <>
-    <Form/>
-    <ColorList colors={colors}/>
-    </>
-  )
+    <main>
+      <Form addColor={addColor} />
+      <ColorList colors={colors} />
+      <ToastContainer position='top-center' />
+    </main>
+  );
 };
 export default App;
